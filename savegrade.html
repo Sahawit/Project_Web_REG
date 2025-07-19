@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Grade Recording</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --mju-green: #006A4E;
+            --mju-green-dark: #004D38;
+            --new-mju-green: #1d8348;}
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f7fafc;
+        }
+        .score-input {
+            @apply w-20 text-center bg-gray-50 border border-gray-300 rounded-md focus:ring-[var(--mju-green)] focus:border-[var(--mju-green)];
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <aside class="w-64 bg-white text-gray-800 flex flex-col shadow-lg">
+            <div class="p-4 border-b flex items-center">
+                <img alt="Maejo University Logo" class="h-12 w-12 mr-3"
+                    src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
+                <div class="flex flex-col justify-center">
+                    <div class="text-lg font-bold -text-gray-600">Maejo University</div>
+                    <div class="text-base -text-gray-600">มหาวิทยาลัยแม่โจ้</div>
+                </div>
+            </div>
+            <nav class="flex-1 p-4">
+                <ul>
+                    <li class="mb-2">
+                        <a class="flex items-center p-3 rounded-lg hover:bg-[var(--mju-green)] hover:text-white text-gray-600 transition-colors"
+                            href="T_dashboard.html">
+                            <span class="material-icons">arrow_back</span>
+                            <span class="ml-4">ถอยกลับ</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="flex items-center p-3 rounded-lg hover:bg-[var(--mju-green)] hover:text-white text-gray-600 transition-colors"
+                            href="#">
+                            <span class="material-icons">description</span>
+                            <span class="ml-4">บันทึกคะแนน</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="flex items-center p-3 rounded-lg hover:bg-[var(--mju-green)] hover:text-white text-gray-600 transition-colors"
+                            href="#">
+                            <span class="material-icons">folder_shared</span>
+                            <span class="ml-4">พิมพ์ใบส่งเกรด</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a class="flex items-center p-3 rounded-lg hover:bg-[var(--mju-green)] hover:text-white text-gray-600 transition-colors"
+                            href="#">
+                            <span class="material-icons">assessment</span>
+                            <span class="ml-4">การกระจายคะแนน</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800">บันทึกคะแนน</h1>
+                <div class="flex items-center space-x-4">
+                    <button
+                        class="flex items-center bg-[var(--mju-green)] text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-800 transition duration-300"
+                        onclick="alert('Grade changes saved!')">
+                        <span class="material-icons mr-2">save</span>
+                        <span>Save Grade Result</span>
+                    </button>
+                    <button
+                        class="flex items-center bg-gray-200 text-gray-700 px-6 py-3 rounded-lg shadow-md hover:bg-gray-300 transition duration-300"
+                        onclick="location.reload()">
+                        <span class="material-icons mr-2">refresh</span>
+                        <span>รีเฟรช</span>
+                    </button>
+                </div>
+            </header>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <span class="font-bold text-gray-600">ปีการศึกษา:</span>
+                        <span class="text-gray-800 ml-2">2568/1 ระดับการศึกษา ปริญญาตรี ปกติ</span>
+                    </div>
+                    <div class="mb-4">
+                        <span class="font-bold text-gray-600">รายวิชา:</span>
+                        <span class="text-gray-800 ml-2">CS432 : Web Designer กลุ่ม 1</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-gray-600">แสดง:</span>
+                        <span class="text-gray-800 ml-2">คะแนนดิบ <a class="text-[var(--mju-green)] hover:underline"
+                                href="#">คะแนนคำนวณ</a> (ไม่สามารถแก้ไขคะแนนได้)</span>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-700">Grade Distribution</h3>
+                            <p class="text-sm text-gray-500">FIX-RATE</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button
+                                class="p-2 rounded-md bg-gray-200 text-gray-600 hover:bg-[var(--mju-green)] hover:text-white transition-colors"
+                                id="bar-chart-btn">
+                                <span class="material-icons text-base">bar_chart</span>
+                            </button>
+                            <button
+                                class="p-2 rounded-md bg-gray-200 text-gray-600 hover:bg-[var(--mju-green)] hover:text-white transition-colors"
+                                id="line-chart-btn">
+                                <span class="material-icons text-base">show_chart</span>
+                            </button>
+                            <button
+                                class="p-2 rounded-md bg-gray-200 text-gray-600 hover:bg-[var(--mju-green)] hover:text-white transition-colors"
+                                id="pie-chart-btn">
+                                <span class="material-icons text-base">pie_chart</span>
+                            </button>
+                        </div>
+                        <div class="text-right text-sm text-gray-500">
+                            <p>AVG=<span id="avg-score">41.55</span></p>
+                            <p>SD=33.47</p>
+                            <p>N=<span id="student-count">11</span></p>
+                        </div>
+                    </div>
+                    <div class="relative h-64">
+                        <canvas id="gradeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md overflow-x-auto">
+                <table class="w-full text-left table-fixed">
+                    <thead class="text-gray-700 uppercase text-sm bg-gray-50">
+                        <tr>
+                            <th class="py-4 px-6 bg-white w-20">ลำดับ</th>
+                            <th class="py-4 px-6 bg-white w-32">รหัส</th>
+                            <th class="py-4 px-6 bg-white w-56">ชื่อ</th>
+                            <th class="py-4 px-6 bg-white w-24">ระบบ</th>
+                            <th class="py-4 px-6 bg-white w-24">สถานะ</th>
+                            <th class="py-4 px-6 text-center bg-white w-40">Edit Point:1 <br />X1:50 15%</th>
+                            <th class="py-4 px-6 text-center bg-white w-40">Edit Point:2 <br />X1:100 35%</th>
+                            <th class="py-4 px-6 text-center bg-white w-40">Edit Point:3 <br />X1:120 50%</th>
+                            <th class="py-4 px-6 bg-white w-24">รวม</th>
+                            <th class="py-4 px-6 bg-gray-50 w-24">T-Score</th>
+                            <th class="py-4 px-6 bg-gray-50 w-48">
+                                <div class="flex items-center"><input
+                                        class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] mr-2"
+                                        id="select-all-cal" type="checkbox" /><label for="select-all-cal">Edit Cal or
+                                        Manual</label></div>
+                            </th>
+                            <th class="py-4 px-6 bg-gray-50 w-24">Result</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600" id="student-table-body">
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">1</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101301</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student1')">Student1</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="40" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="90" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="100" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">85.17</td>
+                            <td class="py-4 px-6 truncate"> </td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-green-600 truncate">A</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">2</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101302</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student2')">Student2</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="45" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="80" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="120" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">91.50</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-green-600 truncate">A</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">3</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101303</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student3')">Student3</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="20" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="50" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="62" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">49.83</td>
+                            <td class="py-4 px-6 truncate"></td>
+                            <td class="py-4 px-6"><input
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    onchange="toggleGradeSelect(this)" type="checkbox" /></td>
+                            <td class="py-4 px-6">
+                                <div class="relative">
+                                    <select
+                                        class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:border-[var(--mju-green)]"
+                                        disabled="">
+                                        <option>F</option>
+                                        <option>A</option>
+                                        <option>B+</option>
+                                        <option>B</option>
+                                        <option>C+</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">4</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101304</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student4')">Student4</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">5</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101305</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student5')">Student5</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">6</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101306</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student6')">Student6</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">7</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101307</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student7')">Student7</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">8</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101308</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student8')">Student8</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">9</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101309</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student9')">Student9</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">10</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101310</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student10')">Student10</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-4 px-6 bg-white truncate">11</td>
+                            <td class="py-4 px-6 bg-white truncate">6704101311</td>
+                            <td class="py-4 px-6 bg-white cursor-pointer hover:text-[var(--mju-green)] hover:font-bold truncate"
+                                onclick="alert('Now editing grade for Student11')">Student11</td>
+                            <td class="py-4 px-6 bg-white truncate">GD</td>
+                            <td class="py-4 px-6 bg-white truncate">ปกติ</td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 text-center bg-white"><input class="score-input"
+                                    onchange="updateRow(this)" type="number" value="0" /></td>
+                            <td class="py-4 px-6 bg-white total-score truncate">0.00</td>
+                            <td class="py-4 px-6 truncate">-</td>
+                            <td class="py-4 px-6"><input checked=""
+                                    class="form-checkbox h-5 w-5 text-[var(--mju-green)] rounded focus:ring-[var(--mju-green)] cal-checkbox"
+                                    type="checkbox" /></td>
+                            <td class="py-4 px-6 font-bold text-red-600 truncate">F</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>
+        const ctx = document.getElementById('gradeChart').getContext('2d');
+        let gradeChart;
+        const chartData = {
+            labels: ['F', 'D', 'C', 'C+', 'B', 'B+', 'A'],
+            datasets: [{
+                label: '# of Students',
+                data: [8, 0, 0, 0, 1, 0, 2],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(0, 128, 0, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(0, 128, 0)',
+                ],
+                borderWidth: 1
+            }]
+        };
+        function createChart(type) {
+            if (gradeChart) {
+                gradeChart.destroy();
+            }
+            gradeChart = new Chart(ctx, {
+                type: type,
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: type === 'bar' || type === 'line' ? {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    } : {},
+                    plugins: {
+                        legend: {
+                            display: type === 'pie'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        function getGrade(score) {
+            if (score >= 80) return 'A';
+            if (score >= 75) return 'B+';
+            if (score >= 70) return 'B';
+            if (score >= 65) return 'C+';
+            if (score >= 60) return 'C';
+            if (score >= 50) return 'D';
+            return 'F';
+        }
+        function updateRow(element) {
+            const row = element.closest('tr');
+            const scores = Array.from(row.querySelectorAll('.score-input')).map(input => parseFloat(input.value) || 0);
+            const weights = [0.15, 0.35, 0.50];
+            const maxScores = [50, 100, 120];
+            let totalScore = 0;
+            for (let i = 0; i < scores.length; i++) {
+                totalScore += (scores[i] / maxScores[i]) * (weights[i] * 100);
+            }
+            row.querySelector('.total-score').textContent = totalScore.toFixed(2);
+            const checkbox = row.querySelector('.cal-checkbox');
+            if (checkbox && checkbox.checked) {
+                const grade = getGrade(totalScore);
+                const resultCell = row.querySelector('td:last-child');
+                resultCell.innerHTML = `<span class="font-bold truncate ${grade === 'F' ? 'text-red-600' : 'text-green-600'}">${grade}</span>`;
+            }
+            updateChartAndAverage();
+        }
+        function toggleGradeSelect(checkbox) {
+            const row = checkbox.closest('tr');
+            const selectContainer = row.querySelector('.relative');
+            const resultCell = row.cells[row.cells.length - 1];
+            if (!checkbox.checked) {
+                if (selectContainer) {
+                    const select = selectContainer.querySelector('select');
+                    select.disabled = false;
+                    resultCell.innerHTML = '';
+                    resultCell.appendChild(selectContainer);
+                }
+            } else {
+                const totalScore = parseFloat(row.querySelector('.total-score').textContent);
+                const grade = getGrade(totalScore);
+                resultCell.innerHTML = `<span class="font-bold truncate ${grade === 'F' ? 'text-red-600' : 'text-green-600'}">${grade}</span>`;
+                if (selectContainer) {
+                    const select = selectContainer.querySelector('select');
+                    select.disabled = true;
+                    // Move it back to a hidden container or just leave it in the cell but disabled
+                }
+            }
+        }
+        function updateChartAndAverage() {
+            const totalScores = Array.from(document.querySelectorAll('.total-score')).map(el => parseFloat(el.textContent) || 0);
+            const sum = totalScores.reduce((acc, score) => acc + score, 0);
+            const count = totalScores.length;
+            const avg = count > 0 ? (sum / count) : 0;
+            const standardDeviation = Math.sqrt(totalScores.map(x => Math.pow(x - avg, 2)).reduce((a, b) => a + b, 0) / count);
+            document.getElementById('avg-score').textContent = avg.toFixed(2);
+            document.getElementById('student-count').textContent = count;
+            document.querySelector('p:nth-child(2)').textContent = `SD=${standardDeviation.toFixed(2)}`;
+            const grades = { 'A': 0, 'B+': 0, 'B': 0, 'C+': 0, 'C': 0, 'D': 0, 'F': 0 };
+            document.querySelectorAll('#student-table-body tr').forEach(row => {
+                const resultCell = row.cells[row.cells.length - 1];
+                let grade;
+                if (resultCell.querySelector('select')) {
+                    grade = resultCell.querySelector('select').value;
+                } else {
+                    grade = resultCell.textContent.trim();
+                }
+                if (grades.hasOwnProperty(grade)) {
+                    grades[grade]++;
+                }
+            });
+            chartData.datasets[0].data = [grades['F'], grades['D'], grades['C'], grades['C+'], grades['B'], grades['B+'], grades['A']];
+            if (gradeChart) {
+                gradeChart.update();
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            createChart('bar');
+            document.querySelectorAll('.cal-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => toggleGradeSelect(checkbox));
+                if (!checkbox.disabled) {
+                    toggleGradeSelect(checkbox);
+                }
+            });
+            const selectAllCheckbox = document.getElementById('select-all-cal');
+            selectAllCheckbox.addEventListener('change', (e) => {
+                const isChecked = e.target.checked;
+                document.querySelectorAll('.cal-checkbox').forEach(checkbox => {
+                    if (checkbox.checked !== isChecked) {
+                        checkbox.checked = isChecked;
+                        toggleGradeSelect(checkbox);
+                    }
+                });
+                updateChartAndAverage();
+            });
+            updateChartAndAverage();
+        });
+        document.getElementById('bar-chart-btn').addEventListener('click', () => createChart('bar'));
+        document.getElementById('line-chart-btn').addEventListener('click', () => createChart('line'));
+        document.getElementById('pie-chart-btn').addEventListener('click', () => createChart('pie'));
+    </script>
+</body>
+
+</html>

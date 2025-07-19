@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>รายชื่ออาจารย์ - มหาวิทยาลัยแม่โจ้</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .hover-text-green:hover {
+            color: #16a34a;
+        }
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-8">
+                    <a class="flex items-center space-x-4 group" href="#">
+                        <img alt="Maejo University Logo" class="h-12 w-auto"
+                            src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
+                        <span
+                            class="text-xl font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
+                            Maejo University <span class="hidden sm:inline">มหาวิทยาลัยแม่โจ้</span>
+                        </span>
+                    </a>
+                    <nav class="hidden md:flex space-x-6">
+                        <a class="text-gray-600 hover:text-green-600 font-semibold transition-colors duration-300"
+                            href="#">หน้าหลัก</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative group">
+                        <button
+                            class="flex items-center text-gray-600 hover:text-green-600 transition-colors duration-300">
+                            <span class="material-icons mr-1">language</span>
+                            <span class="font-semibold">ไทย</span>
+                            <span class="material-icons">arrow_drop_down</span>
+                        </button>
+                        <div
+                            class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10">
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600"
+                                href="#">ไทย</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600"
+                                href="#">English</a>
+                            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600"
+                                href="#">中文</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-gray-800">รายชื่ออาจารย์</h1>
+            <p class="text-gray-600 mt-2">ค้นหารายชื่อและข้อมูลอาจารย์ของมหาวิทยาลัยแม่โจ้</p>
+        </div>
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="material-icons text-gray-400">search</span>
+                </div>
+                <input
+                    class="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm focus:ring-green-500 focus:border-green-500 text-lg"
+                    placeholder="ค้นหาด้วยชื่อ, นามสกุล หรือภาควิชา..." type="text" />
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-100 border-b-2 border-gray-200">
+                            <th class="py-4 px-6 text-gray-600 font-bold uppercase text-sm">#</th>
+                            <th class="py-4 px-6 text-gray-600 font-bold uppercase text-sm">ชื่อ-สกุล (ภาษาไทย)</th>
+                            <th class="py-4 px-6 text-gray-600 font-bold uppercase text-sm">Name (English)</th>
+                            <th class="py-4 px-6 text-gray-600 font-bold uppercase text-sm text-center">ดูข้อมูล</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">1</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ ดร. จันทร์จิรา นันทา</td>
+                            <td class="py-4 px-6 text-gray-600">Junjira Nunta</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">2</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ ดร. วรรณธนา สิงห์น้อยเจริญ</td>
+                            <td class="py-4 px-6 text-gray-600">Wannaubon Singoyocharoen</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">3</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์วิไลรัตน์ ศรีนอท</td>
+                            <td class="py-4 px-6 text-gray-600">Wilairat Srinon</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">4</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ ดร. จักรกฤช เตโช</td>
+                            <td class="py-4 px-6 text-gray-600">Jakkrit Techo</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">5</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ประไพพรรณ กิ่งเกษม</td>
+                            <td class="py-4 px-6 text-gray-600">Prapaipan Kewkasem</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">6</td>
+                            <td class="py-4 px-6 text-gray-800">ผู้ช่วยศาสตราจารย์ กองกาญจน์ ดุลยวิทย์</td>
+                            <td class="py-4 px-6 text-gray-600">Kongkarn Dullayachai</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">7</td>
+                            <td class="py-4 px-6 text-gray-800">ผู้ช่วยศาสตราจารย์ ดร. ธนสิฏฐ์ วงศ์ศิริอำนวย</td>
+                            <td class="py-4 px-6 text-gray-600">Tanasit Wongsiriamnouy</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">8</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ ดร. พีรกานต์ บรรเจิดกิจ</td>
+                            <td class="py-4 px-6 text-gray-600">Pheerakan Banjerdkit</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">9</td>
+                            <td class="py-4 px-6 text-gray-800">ผู้ช่วยศาสตราจารย์ ดร. ชัญญภัค หล้าแหล่ง</td>
+                            <td class="py-4 px-6 text-gray-600">Chanyaphak Lalang</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-green-50 transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-gray-500">10</td>
+                            <td class="py-4 px-6 text-gray-800">อาจารย์ เกียรติชัย ทินวงศ์</td>
+                            <td class="py-4 px-6 text-gray-600">Kiatchai Tinwong</td>
+                            <td class="py-4 px-6 text-center">
+                                <a class="text-green-600 hover:text-green-800" href="#"><span
+                                        class="material-icons">visibility</span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-4 flex items-center justify-between border-t border-gray-200">
+                <span class="text-sm text-gray-600">แสดง 1 ถึง 10 จาก 25 รายการ</span>
+                <div class="flex space-x-1">
+                    <button class="px-3 py-1 border rounded-md bg-white text-gray-600 hover:bg-gray-100"
+                        disabled="">ก่อนหน้า</button>
+                    <button class="px-3 py-1 border rounded-md bg-green-600 text-white">1</button>
+                    <button class="px-3 py-1 border rounded-md bg-white text-gray-600 hover:bg-gray-100">2</button>
+                    <button class="px-3 py-1 border rounded-md bg-white text-gray-600 hover:bg-gray-100">3</button>
+                    <button class="px-3 py-1 border rounded-md bg-white text-gray-600 hover:bg-gray-100">ต่อไป</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 Maejo University. All rights reserved.</p>
+            <p class="text-sm text-gray-500 mt-2">กลุ่มภารกิจทะเบียนเรียนและประมวลผลและรับเข้า: 0-5387-3458</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

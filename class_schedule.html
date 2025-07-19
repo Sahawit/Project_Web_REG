@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Class Schedule</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <style type="text/tailwindcss">
+    body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="flex min-h-screen">
+    <aside class="w-64 flex-shrink-0 bg-white p-6 shadow-lg">
+      <div class="flex items-center mb-10">
+        <img alt="University Logo" class="h-12 w-12 mr-4"
+          src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
+        <div>
+          <h1 class="text-lg font-bold text-gray-800" data-th="มหาวิทยาลัยแม่โจ้" data-en="Maejo University"
+            data-zh="清迈大学">มหาวิทยาลัยแม่โจ้</h1>
+          <p class="text-sm text-gray-600" data-th="MAEJO UNIVERSITY" data-en="MAEJO UNIVERSITY" data-zh="MAEJO 大学">
+            MAEJO UNIVERSITY</p>
+        </div>
+      </div>
+      <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow-lg">
+        <nav>
+          <ul>
+            <li class="mb-4">
+              <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+                href="dashboard.html">
+                <span class="material-icons mr-4">home</span>
+                <span class="font-medium">หน้าหลัก</span>
+              </a>
+            </li>
+            <li>
+              <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+                href="Login.html">
+                <span class="material-icons mr-4">logout</span>
+                <span class="font-medium">ออกจากระบบ </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </aside>
+    <main class="flex-1 p-8">
+      <header class="flex justify-between items-center mb-10">
+        <div>
+          <h1 class="text-4xl font-bold text-gray-800">ตารางเรียน/สอนของรายวิชา</h1>
+          <p class="text-gray-500 mt-1">ภาพรวมของรายวิชาที่ลงทะเบียนสำหรับภาคการศึกษานี้</p>
+        </div>
+        <div class="flex items-center space-x-6">
+          <button
+            class="flex items-center px-4 py-2 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors duration-200 shadow-sm">
+            <span class="material-icons mr-2">language</span>
+            <span>ภาษาไทย</span>
+          </button>
+          <div class="relative">
+            <button class="flex items-center space-x-2">
+              <img alt="User Profile" class="w-12 h-12 rounded-full shadow-md border-2 border-white"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRezVVxvhzvJEN2wHS_e70pRK1UTKDcF134Rg&s" />
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="bg-white p-8 rounded-2xl shadow-md mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-base">
+          <div>
+            <p class="text-gray-600"><strong class="font-semibold text-gray-900">ชื่อ:</strong> นาย หมูเด้ง เด้งเด้งเด้ง
+            </p>
+            <p class="text-gray-600"><strong class="font-semibold text-gray-900">คณะ:</strong> วิทยาศาสตร์</p>
+            <p class="text-gray-600"><strong class="font-semibold text-gray-900">อ. ที่ปรึกษา:</strong>
+              ผู้ช่วยศาสตราจารย์หมูเด้ง ดึ๋ง</p>
+          </div>
+          <div>
+            <p class="text-gray-600"><strong class="font-semibold text-gray-900">สาขา/ภาค:</strong>
+              สาขาวิชาวิทยาการคอมพิวเตอร์</p>
+            <p class="text-gray-600"><strong class="font-semibold text-gray-900">หลักสูตร:</strong> วิทยาศาสตรบัณฑิต
+              สาขาวิชาวิทยาการคอมพิวเตอร์</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-md">
+        <div class="flex justify-between items-center mb-8">
+          <button class="p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
+            <span class="material-icons text-gray-600">chevron_left</span>
+          </button>
+          <div class="text-center">
+            <h2 class="text-2xl font-semibold text-gray-800">ปีการศึกษา 2568 / 1</h2>
+            <p class="text-gray-600 text-lg">ระหว่าง 29/6/2568 - 5/7/2568</p>
+          </div>
+          <button class="p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
+            <span class="material-icons text-gray-600">chevron_right</span>
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-center">
+            <thead>
+              <tr class="border-b-2 border-gray-200">
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">Day/Time</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">8:00-9:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">9:00-10:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">10:00-11:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">11:00-12:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">12:00-13:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">13:00-14:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">14:00-15:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">15:00-16:00</th>
+                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">16:00-17:00</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border border-gray-200 font-semibold text-gray-800">จันทร์</td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-blue-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-blue-800">10301222</p>
+                    <p class="text-blue-700">(3) 1, Lab คอม3-4</p>
+                    <p class="text-blue-700">105</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200"></td>
+                <td class="p-1 border border-gray-200" colspan="2.5">
+                  <div class="bg-purple-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-purple-800">10301222</p>
+                    <p class="text-purple-700">(3) 1, Lab คอม3-4</p>
+                    <p class="text-purple-700">105</p>
+                  </div>
+                </td>
+                <td class="p-1 border border-gray-200">
+                  <div class="bg-pink-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-pink-800">10700313</p>
+                    <p class="text-pink-700">(3) 1, Lab คอม3-4</p>
+                    <p class="text-pink-700">107</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200"></td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-200 font-semibold text-gray-800">อังคาร</td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-indigo-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-indigo-800">10301233</p>
+                    <p class="text-indigo-700">(3) 1, ศร306
+                    </p>
+                    <p class="text-indigo-700">105</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-0 border border-gray-200"></td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-blue-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-blue-800">10301222</p>
+                    <p class="text-blue-700">(3) 1, Lab คอม3-4
+                      105</p>
+                    <p class="text-blue-700">105</p>
+                  </div>
+                </td>
+                <td class="p-1 border border-gray-200">
+                  <div class="bg-green-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-green-800">10301211</p>
+                    <p class="text-green-700">(3) 1, 3203</p>
+                    <p class="text-green-700">141</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200"></td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-200 font-semibold text-gray-800">พุธ</td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-teal-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-teal-800">10301225</p>
+                    <p class="text-teal-700">(3) 1, 3203</p>
+                    <p class="text-teal-700">141</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200" colspan="5"></td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-200 font-semibold text-gray-800">พฤหัสบดี</td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-blue-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-blue-800">10301222</p>
+                    <p class="text-blue-700">(3) 1, Lab คอม3-4</p>
+                    <p class="text-blue-700">105</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200"></td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-1 border border-gray-200">
+                  <div class="bg-pink-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-pink-800">10700313</p>
+                    <p class="text-pink-700">(3) 1, Lab คอม3-4</p>
+                    <p class="text-pink-700">107</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200"></td>
+              </tr>
+              <tr>
+                <td class="p-2 border border-gray-200 font-semibold text-gray-800">ศุกร์</td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-yellow-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-yellow-800">10301211</p>
+                    <p class="text-yellow-700">(3) 1, ศร306</p>
+                    <p class="text-yellow-700">141</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+                <td class="p-0 border border-gray-200"></td>
+                <td class="p-1 border border-gray-200" colspan="2">
+                  <div class="bg-blue-100 rounded-lg p-2 text-xs">
+                    <p class="font-bold text-blue-800">10301222</p>
+                    <p class="text-blue-700">(3) 1, 3203/3-4</p>
+                    <p class="text-blue-700">105</p>
+                  </div>
+                </td>
+                <td class="p-0 border border-gray-200" colspan="2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-red-600 text-sm mt-6">* ข้อมูลที่ปรากฏในการเรียนการสอนประจําตัวนักเรียน
+          จะใช้สำหรับวางแผนการเรียนของนักเรียน, ห้องเรียนและอาจารย์ผู้สอนเท่านั้น</p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-md mt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">ตารางสอบ</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="bg-gray-50 border-b-2 border-gray-200">
+                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">รหัสวิชา</th>
+                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">ชื่อวิชา</th>
+                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider text-center">กลุ่ม</th>
+                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">คาบเวลา/ภาค</th>
+                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">สอบปลายภาค</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10301211</td>
+                <td class="p-4 text-gray-800">คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์และเทคโนโลยีสารสนเทศ Mathematics for
+                  Computer Science</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-800">(ว) 22 ส.ค. 2568 (C) เวลา 09:00-11:00</td>
+                <td class="p-4 text-gray-800">(ว) 21 ต.ค. 2568 (C) N/A</td>
+              </tr>
+              <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10301222</td>
+                <td class="p-4 text-gray-800">โครงสร้างข้อมูลและอัลกอริทึม Data Structure and Algorithm</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-800">(จ) 28 ส.ค. 2568 (C) เวลา 12:00-15:00</td>
+                <td class="p-4 text-gray-800">(จ) 28 ต.ค. 2568 (C) เวลา 12:00-15:00 N/A</td>
+              </tr>
+              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10301233</td>
+                <td class="p-4 text-gray-800">ฐานข้อมูลเชิงสัมพันธ์ Relational Database</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-800">(อ) 20 ส.ค. 2568 (C) เวลา 15:30-18:30</td>
+                <td class="p-4 text-gray-800">(อ) 17 ต.ค. 2568 (C) เวลา 15:30-18:30 N/A</td>
+              </tr>
+              <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10301225</td>
+                <td class="p-4 text-gray-800">วิศวกรรมซอฟต์แวร์ Software Engineering</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-500">-</td>
+                <td class="p-4 text-gray-500">-</td>
+              </tr>
+              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10301231</td>
+                <td class="p-4 text-gray-800">เว็บเทคโนโลยี Web Technology</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-500">-</td>
+                <td class="p-4 text-gray-500">-</td>
+              </tr>
+              <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+                <td class="p-4 text-gray-800">10700313</td>
+                <td class="p-4 text-gray-800">ภาษาอังกฤษสำหรับวิทยาศาสตร์และนวัตกรรม 1 English for Science and
+                  Innovation</td>
+                <td class="p-4 text-center text-gray-800">1</td>
+                <td class="p-4 text-gray-500">-</td>
+                <td class="p-4 text-gray-500">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-gray-600 mt-6">หมายเหตุ: C - Lecture | L - Lab | S - Seminar | 1 - Self-Study | T -
+          Thesis</p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl shadow-md mt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Thesis</h2>
+        <div class="text-center p-12 border-2 border-dashed border-gray-300 rounded-xl">
+          <p class="text-gray-500 text-lg">* ไม่มีข้อมูล *</p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
+          href="#top">
+          to top of page <span class="material-icons ml-2">arrow_upward</span>
+        </a>
+      </div>
+    </main>
+  </div>
+  <footer class="bg-gray-800 text-white text-center p-6 mt-8">
+    <p class="text-base">Powered by Vision Net, 1995 - 2010 | Contact staff:
+      กลุ่มงานส่งเสริมและพัฒนาระบบสารสนเทศและระบบเครือข่ายต่อ 0-5387-3458</p>
+    <p class="text-sm text-gray-400 mt-2">สทป. (msit) | เว็บเมล์ | intranet-based Vision Net Co.,Ltd.</p>
+  </footer>
+
+</body>
+
+</html>

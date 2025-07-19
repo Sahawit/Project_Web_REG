@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MJU Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-sm mx-auto bg-white shadow-lg rounded-3xl p-6">
+    <!-- Logo -->
+    <div class="flex justify-center mb-8">
+      <img src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png"
+        alt="MJU University Logo" class="w-40" />
+    </div>
+
+    <!-- Select Role -->
+    <div class="mb-6 relative">
+      <button type="button" id="role-btn" class="text-sm text-red-600 flex items-center hover:underline">
+        <span class="material-icons text-sm mr-1">arrow_right</span>
+        <span id="selected-role">Student</span>
+      </button>
+      <div id="role-dropdown"
+        class="absolute mt-2 left-0 bg-white border border-gray-200 rounded-md shadow-lg w-40 hidden z-10">
+        <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="Student"> Student</button>
+        <button class="block w-full text-left px-4 py-2 hover:bg-gray-100" data-role="Lecturer"> Lecturer</button>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" action="#" method="POST" class="space-y-6">
+      <!-- User ID -->
+      <div>
+        <label for="student-id" id="id-label" class="block mb-1 text-sm font-medium text-gray-700">Student ID</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <span class="material-icons text-gray-500">person</span>
+          </span>
+          <input id="student-id" name="student-id" type="text" placeholder="Student ID"
+            class="w-full pl-10 pr-20 py-3 bg-gray-200 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            autocomplete="username" required />
+          <span
+            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 text-sm pointer-events-none">@mju.ac.th</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="sr-only">Password</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <span class="material-icons text-gray-500">lock</span>
+          </span>
+          <input id="password" name="password" type="password" placeholder="Password"
+            class="w-full pl-10 pr-4 py-3 bg-gray-200 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            autocomplete="current-password" required />
+        </div>
+        <div class="text-right mt-2">
+          <a href="#" id="forgot-btn" class="text-sm text-gray-600 hover:underline">Forgot your password?</a>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+        class="w-full bg-green-800 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
+        Login
+      </button>
+
+      <!-- Result Message -->
+      <p id="login-result" class="text-center mt-2 font-semibold"></p>
+    </form>
+
+    <!-- Alternative Sign-ins -->
+    <div class="mt-8 text-center">
+      <p class="text-sm text-gray-500 mb-4">Login with</p>
+      <div class="space-y-3">
+        <button type="button" id="mju-app-signin"
+          class="w-full flex items-center justify-center bg-pink-50 border border-pink-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-pink-100 transition duration-300">Sign
+          in by MJU mobile app</button>
+        <button type="button" id="thaiid-signin"
+          class="w-full flex items-center justify-center bg-pink-50 border border-pink-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-pink-100 transition duration-300">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg54ovhxZrCm7tbNo6aX5XNkCGefIk3C2Rw21rR0Mzi2NlRF9YuHSWv6JqCcewkjZo9M5kO5nmGBt9aStVftUQIrmjOWkOrJECdylh_c4EQkIQt56QYbjMwVPgVIyWZbUiPDYs6w8VORPSBB20TVrOemaUcVHDNtonCbkpH7mw-ZjEME5cNd8CVwaBQ7v-Guc1VNkevopDCHaG-JH3BOHU1cbx9hZ2Uvsrq_A30LQ9_81o94ApcnLbmOERkoHY5OJGkqxPx3RV-ns"
+            alt="ThaiID logo" class="w-6 h-6 mr-2" />
+          Sign in by ThaiID
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById("login-form");
+    const studentInput = document.getElementById("student-id");
+    const passwordInput = document.getElementById("password");
+    const resultBox = document.getElementById("login-result");
+    const idLabel = document.getElementById("id-label");
+    const selectedRoleSpan = document.getElementById("selected-role");
+    const roleBtn = document.getElementById("role-btn");
+    const dropdown = document.getElementById("role-dropdown");
+
+    // ฟังก์ชันแปลงตัวอักษร a-z เป็น 1-26
+    function charToNumber(char) {
+      const code = char.toLowerCase().charCodeAt(0);
+      if (code >= 97 && code <= 122) {
+        return code - 96; // 'a' = 97, -96 = 1
+      }
+      return null;
+    }
+
+    // ตั้งค่า default role เป็น Student ตอนโหลดหน้าเว็บ
+    function setDefaultRole() {
+      selectedRoleSpan.textContent = "Student";
+      studentInput.placeholder = "Student ID";
+      studentInput.name = "student-id";
+      idLabel.textContent = "Student ID";
+    }
+    setDefaultRole();
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const rawId = studentInput.value.trim().toLowerCase();
+      const rawPw = passwordInput.value.trim();
+
+      const selectedRole = selectedRoleSpan.textContent;
+
+      if (selectedRole !== "Student" && selectedRole !== "Lecturer") {
+        showResult("กรุณาเลือก Role ก่อนเข้าสู่ระบบ", false);
+        return;
+      }
+
+      if (rawId.length !== 1 || !/[a-z]/.test(rawId)) {
+        showResult("User ID ต้องเป็นตัวอักษร a-z ตัวเดียวเท่านั้น", false);
+        return;
+      }
+
+      const expectedPw = charToNumber(rawId)?.toString();
+
+      if (!expectedPw) {
+        showResult("User ID ไม่ถูกต้อง", false);
+        return;
+      }
+
+      if (rawPw !== expectedPw) {
+        showResult("รหัสผ่านไม่ถูกต้อง", false);
+        return;
+      }
+
+      // ผ่านทุกการตรวจสอบ
+      showResult("Login success", true);
+
+      // ใส่ตรงนี้เลยครับ
+      localStorage.setItem('username', rawId.toUpperCase());
+
+      setTimeout(() => {
+        if (selectedRole === "Student") {
+          window.location.href = "dashboard.html";
+        } else if (selectedRole === "Lecturer") {
+          window.location.href = "T_dashboard.html"; // หรือชื่อไฟล์หน้าของอาจารย์ที่คุณตั้งไว้
+        }
+      }, 1000);
+    });
+
+    function showResult(msg, success) {
+      resultBox.textContent = msg;
+      resultBox.style.color = success ? "green" : "red";
+    }
+
+    document.getElementById("forgot-btn").addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("(demo) โปรดติดต่อฝ่าย IT เพื่อรีเซ็ตรหัสผ่าน");
+    });
+
+    document.getElementById("mju-app-signin").addEventListener("click", () => {
+      alert("(demo) เปิดแอป MJU เพื่อยืนยันตัวตน");
+    });
+
+    document.getElementById("thaiid-signin").addEventListener("click", () => {
+      alert("(demo) ระบบ ThaiID ยังไม่เชื่อมต่อ");
+    });
+
+    roleBtn.addEventListener("click", () => {
+      dropdown.classList.toggle("hidden");
+    });
+
+    dropdown.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const role = e.target.getAttribute("data-role");
+        selectedRoleSpan.textContent = role;
+        dropdown.classList.add("hidden");
+
+        if (role === "Lecturer") {
+          studentInput.placeholder = "Lecturer ID";
+          studentInput.name = "lecturer-id";
+          idLabel.textContent = "Lecturer ID";
+
+        } else {
+          studentInput.placeholder = "Student ID";
+          studentInput.name = "student-id";
+          idLabel.textContent = "Student ID";
+        }
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!roleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+
+</html>
