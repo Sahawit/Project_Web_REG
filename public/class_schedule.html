@@ -20,38 +20,69 @@
 </head>
 
 <body class="bg-gray-50">
-  <div class="flex min-h-screen">
-    <aside class="w-64 flex-shrink-0 bg-white p-6 shadow-lg">
-      <div class="flex items-center mb-10">
-        <img alt="University Logo" class="h-12 w-12 mr-4"
-          src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
-        <div>
-          <h1 class="text-lg font-bold text-gray-800" data-th="มหาวิทยาลัยแม่โจ้" data-en="Maejo University"
-            data-zh="清迈大学">มหาวิทยาลัยแม่โจ้</h1>
-          <p class="text-sm text-gray-600" data-th="MAEJO UNIVERSITY" data-en="MAEJO UNIVERSITY" data-zh="MAEJO 大学">
-            MAEJO UNIVERSITY</p>
+  <header class="bg-white shadow-md">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-2">
+        <div class="flex items-center">
+          <img alt="University Logo" class="h-20 mr-4"
+            src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
+          <div>
+            <h1 class="text-2xl font-bold text-green-700">มหาวิทยาลัยแม่โจ้</h1>
+            <h2 class="text-xl text-green-700">MAEJO UNIVERSITY</h2>
+          </div>
         </div>
+        
+        <script>
+          const langBtn = document.getElementById('langBtn');
+          const langMenu = document.getElementById('langMenu');
+          langBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            langMenu.classList.toggle('hidden');
+          });
+          document.addEventListener('click', function () {
+            langMenu.classList.add('hidden');
+          });
+          function setAndReloadLang(lang) {
+            localStorage.setItem('lang', lang);
+            // Redirect to the same page with language parameter
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', lang);
+            window.location.href = url.toString();
+          }
+          // Set current language display
+          const currentLang = localStorage.getItem('lang') || (new URLSearchParams(window.location.search).get('lang')) || 'th';
+          document.getElementById('currentLang').textContent =
+            currentLang === 'en' ? 'English' : currentLang === 'zh' ? '中文' : 'ภาษาไทย';
+        </script>
       </div>
-      <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-        <nav>
-          <ul>
-            <li class="mb-4">
-              <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
-                href="dashboard.html">
-                <span class="material-icons mr-4">home</span>
-                <span class="font-medium">หน้าหลัก</span>
-              </a>
-            </li>
-            <li>
-              <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
-                href="Login.html">
-                <span class="material-icons mr-4">logout</span>
-                <span class="font-medium">ออกจากระบบ </span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+    </div>
+    </div>
+    </div>
+  </header>
+  <div class="flex min-h-screen mx-auto px-4 mt-8 gap-5">
+
+    <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow-lg">
+      <div class="p-4 border-b pb-2border-gray-200">
+        <h1 class="text-xl font-bold text-green-900">เมนูหลัก</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="mb-4">
+            <a class="flex items-center mt-2 text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+              href="dashboard.html">
+              <span class="material-icons mr-4">home</span>
+              <span class="font-medium">หน้าหลัก</span>
+            </a>
+          </li>
+          <li>
+            <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+              href="Home.html">
+              <span class="material-icons mr-4">logout</span>
+              <span class="font-medium">ออกจากระบบ </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </aside>
     <main class="flex-1 p-8">
       <header class="flex justify-between items-center mb-10">
