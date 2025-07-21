@@ -13,10 +13,10 @@
     rel="stylesheet" />
   <style type="text/tailwindcss">
     body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f7fafc;
-        }
-    </style>
+      font-family: 'Sarabun', sans-serif;
+      background-color: #f7fafc;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-50">
@@ -31,38 +31,92 @@
             <h2 class="text-xl text-green-700">MAEJO UNIVERSITY</h2>
           </div>
         </div>
-        
+        <!-- Hamburger for mobile -->
+        <button id="hamburgerBtn" class="md:hidden flex items-center p-2 rounded hover:bg-gray-100 focus:outline-none">
+          <span class="material-icons text-3xl text-green-700">menu</span>
+        </button>
         <script>
-          const langBtn = document.getElementById('langBtn');
-          const langMenu = document.getElementById('langMenu');
-          langBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            langMenu.classList.toggle('hidden');
+          // Hamburger toggle
+          document.addEventListener('DOMContentLoaded', function () {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileAside = document.getElementById('mobileAside');
+            const mobileAsideBg = document.getElementById('mobileAsideBg');
+            if (hamburgerBtn) {
+              hamburgerBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                mobileAside.classList.remove('translate-x-[-100%]');
+                mobileAside.classList.add('translate-x-0');
+                mobileAsideBg.classList.remove('hidden');
+              });
+            }
+            if (mobileAsideBg) {
+              mobileAsideBg.addEventListener('click', function () {
+                mobileAside.classList.add('translate-x-[-100%]');
+                mobileAside.classList.remove('translate-x-0');
+                mobileAsideBg.classList.add('hidden');
+              });
+            }
+            // Close aside on ESC
+            document.addEventListener('keydown', function (e) {
+              if (e.key === 'Escape') {
+                mobileAside.classList.add('translate-x-[-100%]');
+                mobileAside.classList.remove('translate-x-0');
+                mobileAsideBg.classList.add('hidden');
+              }
+            });
           });
-          document.addEventListener('click', function () {
-            langMenu.classList.add('hidden');
-          });
-          function setAndReloadLang(lang) {
-            localStorage.setItem('lang', lang);
-            // Redirect to the same page with language parameter
-            const url = new URL(window.location.href);
-            url.searchParams.set('lang', lang);
-            window.location.href = url.toString();
-          }
-          // Set current language display
-          const currentLang = localStorage.getItem('lang') || (new URLSearchParams(window.location.search).get('lang')) || 'th';
-          document.getElementById('currentLang').textContent =
-            currentLang === 'en' ? 'English' : currentLang === 'zh' ? '中文' : 'ภาษาไทย';
         </script>
       </div>
     </div>
-    </div>
-    </div>
   </header>
-  <div class="flex min-h-screen mx-auto px-4 mt-8 gap-5">
-
-    <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-      <div class="p-4 border-b pb-2border-gray-200">
+  <!-- Mobile aside overlay -->
+  <div id="mobileAsideBg" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden md:hidden"></div>
+  <!-- Mobile aside -->
+  <aside id="mobileAside"
+    class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:hidden">
+    <div class="flex justify-between items-center p-4 border-b">
+      <h1 class="text-xl font-bold text-green-900">เมนูหลัก</h1>
+      <button id="closeAsideBtn" class="p-2 rounded hover:bg-gray-100 focus:outline-none">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+    </div>
+    <nav class="p-4">
+      <ul>
+        <li class="mb-4">
+          <a class="flex items-center mt-2 text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+            href="dashboard.html">
+            <span class="material-icons mr-4">home</span>
+            <span class="font-medium">หน้าหลัก</span>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center text-gray-700 hover:text-green-600 hover:bg-green-50 p-3 rounded-lg transition-colors duration-200"
+            href="index.html">
+            <span class="material-icons mr-4">logout</span>
+            <span class="font-medium">ออกจากระบบ </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const closeAsideBtn = document.getElementById('closeAsideBtn');
+        const mobileAside = document.getElementById('mobileAside');
+        const mobileAsideBg = document.getElementById('mobileAsideBg');
+        if (closeAsideBtn) {
+          closeAsideBtn.addEventListener('click', function () {
+            mobileAside.classList.add('translate-x-[-100%]');
+            mobileAside.classList.remove('translate-x-0');
+            mobileAsideBg.classList.add('hidden');
+          });
+        }
+      });
+    </script>
+  </aside>
+  <div class="flex flex-col md:flex-row min-h-screen mx-auto px-2 md:px-4 mt-4 md:mt-8 gap-5">
+    <!-- Desktop aside -->
+    <aside class="hidden md:block md:col-span-1 bg-white p-6 rounded-lg shadow-lg min-w-[220px]">
+      <div class="p-4 border-b pb-2 border-gray-200">
         <h1 class="text-xl font-bold text-green-900">เมนูหลัก</h1>
       </div>
       <nav>
@@ -84,28 +138,28 @@
         </ul>
       </nav>
     </aside>
-    <main class="flex-1 p-8">
-      <header class="flex justify-between items-center mb-10">
+    <main class="flex-1 p-2 md:p-8">
+      <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-10 gap-4">
         <div>
-          <h1 class="text-4xl font-bold text-gray-800">ตารางเรียน/สอนของรายวิชา</h1>
+          <h1 class="text-2xl md:text-4xl font-bold text-gray-800">ตารางเรียน/สอนของรายวิชา</h1>
           <p class="text-gray-500 mt-1">ภาพรวมของรายวิชาที่ลงทะเบียนสำหรับภาคการศึกษานี้</p>
         </div>
-        <div class="flex items-center space-x-6">
+        <div class="flex items-center space-x-4 md:space-x-6">
           <button
-            class="flex items-center px-4 py-2 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors duration-200 shadow-sm">
+            class="flex items-center px-3 md:px-4 py-2 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors duration-200 shadow-sm text-sm md:text-base">
             <span class="material-icons mr-2">language</span>
             <span>ภาษาไทย</span>
           </button>
           <div class="relative">
             <button class="flex items-center space-x-2">
-              <img alt="User Profile" class="w-12 h-12 rounded-full shadow-md border-2 border-white"
+              <img alt="User Profile" class="w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md border-2 border-white"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRezVVxvhzvJEN2wHS_e70pRK1UTKDcF134Rg&s" />
             </button>
           </div>
         </div>
       </header>
-      <div class="bg-white p-8 rounded-2xl shadow-md mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-base">
+      <div class="bg-white p-4 md:p-8 rounded-2xl shadow-md mb-6 md:mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-4 md:gap-y-6 text-base">
           <div>
             <p class="text-gray-600"><strong class="font-semibold text-gray-900">ชื่อ:</strong> นาย หมูเด้ง เด้งเด้งเด้ง
             </p>
@@ -121,36 +175,37 @@
           </div>
         </div>
       </div>
-      <div class="bg-white p-8 rounded-2xl shadow-md">
-        <div class="flex justify-between items-center mb-8">
-          <button class="p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
+      <div class="bg-white p-4 md:p-8 rounded-2xl shadow-md">
+        <div class="flex justify-between items-center mb-6 md:mb-8">
+          <button class="p-2 md:p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
             <span class="material-icons text-gray-600">chevron_left</span>
           </button>
           <div class="text-center">
-            <h2 class="text-2xl font-semibold text-gray-800">ปีการศึกษา 2568 / 1</h2>
-            <p class="text-gray-600 text-lg">ระหว่าง 29/6/2568 - 5/7/2568</p>
+            <h2 class="text-lg md:text-2xl font-semibold text-gray-800">ปีการศึกษา 2568 / 1</h2>
+            <p class="text-gray-600 text-base md:text-lg">ระหว่าง 29/6/2568 - 5/7/2568</p>
           </div>
-          <button class="p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
+          <button class="p-2 md:p-3 rounded-full hover:bg-gray-100 transition-colors duration-200">
             <span class="material-icons text-gray-600">chevron_right</span>
           </button>
         </div>
         <div class="overflow-x-auto">
-          <table class="w-full border-collapse text-center">
+          <table class="w-full border-collapse text-center text-xs md:text-base">
             <thead>
               <tr class="border-b-2 border-gray-200">
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">Day/Time</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">8:00-9:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">9:00-10:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">10:00-11:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">11:00-12:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">12:00-13:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">13:00-14:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">14:00-15:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">15:00-16:00</th>
-                <th class="p-4 bg-gray-50 text-gray-700 font-semibold text-sm uppercase tracking-wider">16:00-17:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">Day/Time</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">8:00-9:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">9:00-10:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">10:00-11:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">11:00-12:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">12:00-13:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">13:00-14:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">14:00-15:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">15:00-16:00</th>
+                <th class="p-2 md:p-4 bg-gray-50 text-gray-700 font-semibold text-xs md:text-sm uppercase tracking-wider">16:00-17:00</th>
               </tr>
             </thead>
             <tbody>
+              <!-- ตารางเหมือนเดิม -->
               <tr>
                 <td class="p-2 border border-gray-200 font-semibold text-gray-800">จันทร์</td>
                 <td class="p-0 border border-gray-200" colspan="2"></td>
@@ -263,80 +318,81 @@
             </tbody>
           </table>
         </div>
-        <p class="text-red-600 text-sm mt-6">* ข้อมูลที่ปรากฏในการเรียนการสอนประจําตัวนักเรียน
+        <p class="text-red-600 text-xs md:text-sm mt-4 md:mt-6">* ข้อมูลที่ปรากฏในการเรียนการสอนประจําตัวนักเรียน
           จะใช้สำหรับวางแผนการเรียนของนักเรียน, ห้องเรียนและอาจารย์ผู้สอนเท่านั้น</p>
       </div>
-      <div class="bg-white p-8 rounded-2xl shadow-md mt-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">ตารางสอบ</h2>
+      <div class="bg-white p-4 md:p-8 rounded-2xl shadow-md mt-6 md:mt-8">
+        <h2 class="text-lg md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6 text-center">ตารางสอบ</h2>
         <div class="overflow-x-auto">
-          <table class="w-full text-left">
+          <table class="w-full text-left text-xs md:text-base">
             <thead>
               <tr class="bg-gray-50 border-b-2 border-gray-200">
-                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">รหัสวิชา</th>
-                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">ชื่อวิชา</th>
-                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider text-center">กลุ่ม</th>
-                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">คาบเวลา/ภาค</th>
-                <th class="p-4 font-semibold text-gray-700 uppercase text-sm tracking-wider">สอบปลายภาค</th>
+                <th class="p-2 md:p-4 font-semibold text-gray-700 uppercase text-xs md:text-sm tracking-wider">รหัสวิชา</th>
+                <th class="p-2 md:p-4 font-semibold text-gray-700 uppercase text-xs md:text-sm tracking-wider">ชื่อวิชา</th>
+                <th class="p-2 md:p-4 font-semibold text-gray-700 uppercase text-xs md:text-sm tracking-wider text-center">กลุ่ม</th>
+                <th class="p-2 md:p-4 font-semibold text-gray-700 uppercase text-xs md:text-sm tracking-wider">คาบเวลา/ภาค</th>
+                <th class="p-2 md:p-4 font-semibold text-gray-700 uppercase text-xs md:text-sm tracking-wider">สอบปลายภาค</th>
               </tr>
             </thead>
             <tbody>
+              <!-- ตารางสอบเหมือนเดิม -->
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10301211</td>
-                <td class="p-4 text-gray-800">คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์และเทคโนโลยีสารสนเทศ Mathematics for
+                <td class="p-2 md:p-4 text-gray-800">10301211</td>
+                <td class="p-2 md:p-4 text-gray-800">คณิตศาสตร์สำหรับวิทยาการคอมพิวเตอร์และเทคโนโลยีสารสนเทศ Mathematics for
                   Computer Science</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-800">(ว) 22 ส.ค. 2568 (C) เวลา 09:00-11:00</td>
-                <td class="p-4 text-gray-800">(ว) 21 ต.ค. 2568 (C) N/A</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-800">(ว) 22 ส.ค. 2568 (C) เวลา 09:00-11:00</td>
+                <td class="p-2 md:p-4 text-gray-800">(ว) 21 ต.ค. 2568 (C) N/A</td>
               </tr>
               <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10301222</td>
-                <td class="p-4 text-gray-800">โครงสร้างข้อมูลและอัลกอริทึม Data Structure and Algorithm</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-800">(จ) 28 ส.ค. 2568 (C) เวลา 12:00-15:00</td>
-                <td class="p-4 text-gray-800">(จ) 28 ต.ค. 2568 (C) เวลา 12:00-15:00 N/A</td>
+                <td class="p-2 md:p-4 text-gray-800">10301222</td>
+                <td class="p-2 md:p-4 text-gray-800">โครงสร้างข้อมูลและอัลกอริทึม Data Structure and Algorithm</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-800">(จ) 28 ส.ค. 2568 (C) เวลา 12:00-15:00</td>
+                <td class="p-2 md:p-4 text-gray-800">(จ) 28 ต.ค. 2568 (C) เวลา 12:00-15:00 N/A</td>
               </tr>
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10301233</td>
-                <td class="p-4 text-gray-800">ฐานข้อมูลเชิงสัมพันธ์ Relational Database</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-800">(อ) 20 ส.ค. 2568 (C) เวลา 15:30-18:30</td>
-                <td class="p-4 text-gray-800">(อ) 17 ต.ค. 2568 (C) เวลา 15:30-18:30 N/A</td>
+                <td class="p-2 md:p-4 text-gray-800">10301233</td>
+                <td class="p-2 md:p-4 text-gray-800">ฐานข้อมูลเชิงสัมพันธ์ Relational Database</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-800">(อ) 20 ส.ค. 2568 (C) เวลา 15:30-18:30</td>
+                <td class="p-2 md:p-4 text-gray-800">(อ) 17 ต.ค. 2568 (C) เวลา 15:30-18:30 N/A</td>
               </tr>
               <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10301225</td>
-                <td class="p-4 text-gray-800">วิศวกรรมซอฟต์แวร์ Software Engineering</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-500">-</td>
-                <td class="p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-gray-800">10301225</td>
+                <td class="p-2 md:p-4 text-gray-800">วิศวกรรมซอฟต์แวร์ Software Engineering</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
               </tr>
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10301231</td>
-                <td class="p-4 text-gray-800">เว็บเทคโนโลยี Web Technology</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-500">-</td>
-                <td class="p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-gray-800">10301231</td>
+                <td class="p-2 md:p-4 text-gray-800">เว็บเทคโนโลยี Web Technology</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
               </tr>
               <tr class="bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
-                <td class="p-4 text-gray-800">10700313</td>
-                <td class="p-4 text-gray-800">ภาษาอังกฤษสำหรับวิทยาศาสตร์และนวัตกรรม 1 English for Science and
+                <td class="p-2 md:p-4 text-gray-800">10700313</td>
+                <td class="p-2 md:p-4 text-gray-800">ภาษาอังกฤษสำหรับวิทยาศาสตร์และนวัตกรรม 1 English for Science and
                   Innovation</td>
-                <td class="p-4 text-center text-gray-800">1</td>
-                <td class="p-4 text-gray-500">-</td>
-                <td class="p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-center text-gray-800">1</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
+                <td class="p-2 md:p-4 text-gray-500">-</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="text-sm text-gray-600 mt-6">หมายเหตุ: C - Lecture | L - Lab | S - Seminar | 1 - Self-Study | T -
+        <p class="text-xs md:text-sm text-gray-600 mt-4 md:mt-6">หมายเหตุ: C - Lecture | L - Lab | S - Seminar | 1 - Self-Study | T -
           Thesis</p>
       </div>
-      <div class="bg-white p-8 rounded-2xl shadow-md mt-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Thesis</h2>
-        <div class="text-center p-12 border-2 border-dashed border-gray-300 rounded-xl">
-          <p class="text-gray-500 text-lg">* ไม่มีข้อมูล *</p>
+      <div class="bg-white p-4 md:p-8 rounded-2xl shadow-md mt-6 md:mt-8">
+        <h2 class="text-lg md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6 text-center">Thesis</h2>
+        <div class="text-center p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-xl">
+          <p class="text-gray-500 text-base md:text-lg">* ไม่มีข้อมูล *</p>
         </div>
       </div>
-      <div class="text-center mt-12">
+      <div class="text-center mt-8 md:mt-12">
         <a class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
           href="#top">
           to top of page <span class="material-icons ml-2">arrow_upward</span>
@@ -344,12 +400,11 @@
       </div>
     </main>
   </div>
-  <footer class="bg-gray-800 text-white text-center p-6 mt-8">
-    <p class="text-base">Powered by Vision Net, 1995 - 2010 | Contact staff:
+  <footer class="bg-gray-800 text-white text-center p-4 md:p-6 mt-6 md:mt-8">
+    <p class="text-sm md:text-base">Powered by Vision Net, 1995 - 2010 | Contact staff:
       กลุ่มงานส่งเสริมและพัฒนาระบบสารสนเทศและระบบเครือข่ายต่อ 0-5387-3458</p>
-    <p class="text-sm text-gray-400 mt-2">สทป. (msit) | เว็บเมล์ | intranet-based Vision Net Co.,Ltd.</p>
+    <p class="text-xs md:text-sm text-gray-400 mt-2">สทป. (msit) | เว็บเมล์ | intranet-based Vision Net Co.,Ltd.</p>
   </footer>
-
 </body>
 
 </html>

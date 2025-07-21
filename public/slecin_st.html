@@ -16,18 +16,18 @@
 <body class="bg-gray-100">
     <header class="bg-white shadow-md">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-2">
-                <div class="flex items-center">
-                    <img alt="University Logo" class="h-20 mr-4"
+            <div class="flex flex-col sm:flex-row justify-between items-center py-2 gap-2">
+                <div class="flex items-center w-full sm:w-auto justify-center sm:justify-start">
+                    <img alt="University Logo" class="h-16 sm:h-20 mr-4"
                         src="https://upload.wikimedia.org/wikipedia/th/thumb/b/b7/MJU_LOGO.svg/1200px-MJU_LOGO.svg.png" />
                     <div>
-                        <h1 class="text-2xl font-bold text-green-700">มหาวิทยาลัยแม่โจ้</h1>
-                        <h2 class="text-xl text-green-700">MAEJO UNIVERSITY</h2>
+                        <h1 class="text-lg sm:text-2xl font-bold text-green-700">มหาวิทยาลัยแม่โจ้</h1>
+                        <h2 class="text-base sm:text-xl text-green-700">MAEJO UNIVERSITY</h2>
                     </div>
                 </div>
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left w-full sm:w-auto flex justify-center sm:justify-end">
                     <button id="langBtn"
-                        class="flex items-center border border-gray-300 rounded-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">
+                        class="flex items-center border border-gray-300 rounded-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none w-full sm:w-auto justify-center">
                         <span class="material-icons mr-2 text-xl">language</span>
                         <span id="currentLang">ภาษาไทย</span>
                         <span class="material-icons ml-2">arrow_drop_down</span>
@@ -54,44 +54,52 @@
                     });
                     function setAndReloadLang(lang) {
                         localStorage.setItem('lang', lang);
-                        // Redirect to the same page with language parameter
                         const url = new URL(window.location.href);
                         url.searchParams.set('lang', lang);
                         window.location.href = url.toString();
                     }
-                    // Set current language display
                     const currentLang = localStorage.getItem('lang') || (new URLSearchParams(window.location.search).get('lang')) || 'th';
                     document.getElementById('currentLang').textContent =
                         currentLang === 'en' ? 'English' : currentLang === 'zh' ? '中文' : 'ภาษาไทย';
                 </script>
             </div>
         </div>
-        </div>
-        </div>
     </header>
-    <div class="flex min-h-screen mx-auto px-4 mt-8 gap-4">
-        <aside class="md:col-span-1 bg-white p-6 rounded-lg shadow-lg">
-            <div class="p-4 border-b pb-2 border-gray-200">
-                <h1 class="text-xl font-bold text-green-900">เมนูหลัก</h1>
+    <div class="flex flex-col md:flex-row min-h-screen mx-auto px-2 sm:px-4 mt-4 sm:mt-8 gap-4">
+        <!-- Hamburger for mobile -->
+        <button id="menuBtn" class="md:hidden fixed top-4 left-4 z-30 bg-white rounded-full p-2 shadow-lg border border-gray-200 focus:outline-none" aria-label="เปิดเมนู">
+            <span class="material-icons text-2xl text-green-700">menu</span>
+        </button>
+        <!-- Overlay for mobile menu -->
+        <div id="menuOverlay" class="fixed inset-0 bg-black bg-opacity-40 z-20 hidden"></div>
+        <!-- Sidebar -->
+        <aside id="sidebarMenu" class="md:col-span-1 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-64 max-w-full md:w-64 mb-4 md:mb-0 fixed md:static top-0 left-0 h-full z-30 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out">
+            <div class="flex justify-between items-center md:hidden mb-4">
+                <h1 class="text-lg font-bold text-green-900">เมนูหลัก</h1>
+                <button id="closeMenuBtn" class="p-1 rounded-full hover:bg-gray-100 focus:outline-none" aria-label="ปิดเมนู">
+                    <span class="material-icons text-2xl text-green-700">close</span>
+                </button>
             </div>
-            <nav class="mt-2 class="flex items-center bg-[var(--mju-green)] text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-800 transition duration-300">
-                <a class="flex items-center px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-800 transition duration-200"
+            <div class="p-2 sm:p-4 border-b pb-2 border-gray-200 hidden md:block">
+                <h1 class="text-lg sm:text-xl font-bold text-green-900">เมนูหลัก</h1>
+            </div>
+            <nav class="mt-2">
+                <a class="flex items-center px-4 sm:px-6 py-2 sm:py-3 text-gray-600 hover:bg-green-50 hover:text-green-800 transition duration-200"
                     href="index.html">
                     <span class="material-icons mr-3 text-gray-400">home</span>
                     หน้าหลัก
                 </a>
-                <a class="flex items-center mt-2 px-6 py-3 text-gray-600 hover:bg-green-50 hover:text-green-800 transition duration-200"
+                <a class="flex items-center mt-2 px-4 sm:px-6 py-2 sm:py-3 text-gray-600 hover:bg-green-50 hover:text-green-800 transition duration-200"
                     href="#">
                     <span class="material-icons mr-3 text-gray-400">class</span>
                     ตารางเรียนรายวิชา
                 </a>
             </nav>
-            <div class="absolute bottom-10 left-10">
         </aside>
-        <main class="flex-1 p-8">
-            <header class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-800">ตารางสอนอาจารย์</h2>
-                <div class="flex items-center space-x-4 text-gray-600 mt-2">
+        <main class="flex-1 p-2 sm:p-8 md:ml-0">
+            <header class="mb-4 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800">ตารางสอนอาจารย์</h2>
+                <div class="flex flex-wrap items-center space-x-2 sm:space-x-4 text-gray-600 mt-2 text-xs sm:text-base">
                     <span>ปีการศึกษา</span>
                     <span class="font-bold text-green-700">2568</span>
                     <span class="text-gray-400">/</span>
@@ -108,30 +116,30 @@
                     </button>
                 </div>
             </header>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <table class="w-full text-sm text-left text-gray-500 border-collapse border border-gray-300">
+            <div class="bg-white rounded-lg shadow-lg overflow-x-auto">
+                <table class="min-w-[600px] w-full text-xs sm:text-sm text-left text-gray-500 border-collapse border border-gray-300">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 w-1/12 border border-gray-300" scope="col">เวลา</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">9:00-10:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">10:00-11:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">11:00-12:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">12:00-13:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">13:00-14:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">14:00-15:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">15:00-16:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">16:00-17:00</th>
-                            <th class="px-6 py-3 border border-gray-300" scope="col">17:00-18:00</th>
+                            <th class="px-2 sm:px-6 py-3 w-1/12 border border-gray-300" scope="col">เวลา</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">9:00-10:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">10:00-11:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">11:00-12:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">12:00-13:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">13:00-14:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">14:00-15:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">15:00-16:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">16:00-17:00</th>
+                            <th class="px-2 sm:px-6 py-3 border border-gray-300" scope="col">17:00-18:00</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="bg-white border-b border-gray-300">
-                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
+                            <th class="px-2 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
                                 scope="row">จันทร์</th>
                             <td class="border border-gray-300"></td>
-                            <td class="p-2 border border-gray-300" colspan="2">
+                            <td class="p-1 sm:p-2 border border-gray-300" colspan="2">
                                 <div
-                                    class="bg-green-100 text-green-800 p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
+                                    class="bg-green-100 text-green-800 p-2 sm:p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
                                     <p class="font-bold">10301314</p>
                                     <p>(3) 1, บรรยาย คอม 8</p>
                                     <p class="text-xs">105</p>
@@ -145,12 +153,12 @@
                             <td class="border border-gray-300"></td>
                         </tr>
                         <tr class="bg-white border-b border-gray-300">
-                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
+                            <th class="px-2 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
                                 scope="row">อังคาร</th>
                             <td class="border border-gray-300"></td>
-                            <td class="p-2 border border-gray-300" colspan="2">
+                            <td class="p-1 sm:p-2 border border-gray-300" colspan="2">
                                 <div
-                                    class="bg-green-100 text-green-800 p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
+                                    class="bg-green-100 text-green-800 p-2 sm:p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
                                     <p class="font-bold">10301314</p>
                                     <p>(3) 1, บรรยาย คอม 6</p>
                                     <p class="text-xs">105</p>
@@ -164,12 +172,12 @@
                             <td class="border border-gray-300"></td>
                         </tr>
                         <tr class="bg-white border-b border-gray-300">
-                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
+                            <th class="px-2 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
                                 scope="row">พุธ</th>
                             <td class="border border-gray-300"></td>
-                            <td class="p-2 border border-gray-300" colspan="2">
+                            <td class="p-1 sm:p-2 border border-gray-300" colspan="2">
                                 <div
-                                    class="bg-green-100 text-green-800 p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
+                                    class="bg-green-100 text-green-800 p-2 sm:p-3 rounded-lg text-center cursor-pointer hover:bg-green-200 transition duration-200">
                                     <p class="font-bold">10301491</p>
                                     <p>(3) 1, บรรยาย คอม 6</p>
                                     <p class="text-xs">105</p>
@@ -183,22 +191,22 @@
                             <td class="border border-gray-300"></td>
                         </tr>
                         <tr class="bg-white border-b border-gray-300">
-                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
+                            <th class="px-2 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
                                 scope="row">พฤหัสบดี</th>
                             <td class="border border-gray-300"></td>
                             <td class="border border-gray-300"></td>
                             <td class="border border-gray-300"></td>
-                            <td class="p-2 border border-gray-300" colspan="2">
+                            <td class="p-1 sm:p-2 border border-gray-300" colspan="2">
                                 <div
-                                    class="bg-teal-100 text-teal-800 p-3 rounded-lg text-center cursor-pointer hover:bg-teal-200 transition duration-200">
+                                    class="bg-teal-100 text-teal-800 p-2 sm:p-3 rounded-lg text-center cursor-pointer hover:bg-teal-200 transition duration-200">
                                     <p class="font-bold">คพ344</p>
                                     <p>(3) 1, Lab คอม 1</p>
                                     <p class="text-xs">105</p>
                                 </div>
                             </td>
-                            <td class="p-2 border border-gray-300" colspan="2">
+                            <td class="p-1 sm:p-2 border border-gray-300" colspan="2">
                                 <div
-                                    class="bg-teal-100 text-teal-800 p-3 rounded-lg text-center cursor-pointer hover:bg-teal-200 transition duration-200">
+                                    class="bg-teal-100 text-teal-800 p-2 sm:p-3 rounded-lg text-center cursor-pointer hover:bg-teal-200 transition duration-200">
                                     <p class="font-bold">คพ344</p>
                                     <p>(3) 1, Lab คอม 1</p>
                                     <p class="text-xs">105</p>
@@ -208,7 +216,7 @@
                             <td class="border border-gray-300"></td>
                         </tr>
                         <tr class="bg-white">
-                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
+                            <th class="px-2 sm:px-6 py-4 font-medium text-gray-900 whitespace-nowrap border border-gray-300"
                                 scope="row">ศุกร์</th>
                             <td class="border border-gray-300"></td>
                             <td class="border border-gray-300"></td>
@@ -223,12 +231,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mt-8 text-sm text-gray-600">
+            <div class="mt-6 sm:mt-8 text-xs sm:text-sm text-gray-600">
                 <p><span class="font-bold">*</span> ข้อมูลที่ปรากฏอยู่ในตารางเรียนประกอบด้วย รหัสวิชา (จำนวนหน่วยกิต)
                     กลุ่ม, ห้องเรียนและอาคาร ตามลำดับ</p>
                 <p class="mt-2">อีเมล: <a class="text-green-700 hover:underline"
                         href="mailto:kongkarn@mju.ac.th">kongkarn@mju.ac.th</a></p>
-                <div class="mt-6">
+                <div class="mt-4 sm:mt-6">
                     <a class="inline-flex items-center text-green-700 hover:text-green-900" href="#">
                         to top of page
                         <span class="material-icons ml-1">arrow_upward</span>
@@ -237,9 +245,9 @@
             </div>
         </main>
     </div>
-    <footer class="bg-gray-200 text-center p-4 text-xs text-gray-600 mt-auto">
+    <footer class="bg-gray-200 text-center p-2 sm:p-4 text-xs text-gray-600 mt-auto">
         <div class="container mx-auto">
-            <div class="flex justify-center space-x-4 mb-2">
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-2">
                 <a class="hover:underline" href="#">สกอ.</a>
                 <a class="hover:underline" href="#">กพอ.</a>
                 <a class="hover:underline" href="#">คบม.</a>
@@ -250,7 +258,46 @@
                 0-5387-3458</p>
         </div>
     </footer>
+    <script>
+        // Hamburger menu logic
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
 
+        function openMenu() {
+            sidebarMenu.classList.remove('-translate-x-full');
+            menuOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+        function closeMenu() {
+            sidebarMenu.classList.add('-translate-x-full');
+            menuOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
+
+        // Close menu on resize to md and up
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 768) {
+                sidebarMenu.classList.remove('-translate-x-full');
+                menuOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                sidebarMenu.classList.add('-translate-x-full');
+            }
+        });
+    </script>
+    <style>
+        @media (max-width: 767px) {
+            #sidebarMenu {
+                width: 80vw;
+                max-width: 320px;
+            }
+        }
+    </style>
 </body>
-
 </html>
